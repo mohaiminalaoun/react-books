@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 class Counter extends Component {
 
     state = {
-        value: this.props &&this.props.value
+        value: this.props &&this.props.value,
+        id: this.props && this.props.id
     };
 
 
@@ -16,22 +17,28 @@ class Counter extends Component {
 
 
     render() {
-        console.log("in render");
-        console.log("props", this.props);
         return (
             <div>
                 {this.props.children}
                 <span className="badge badge-primary m-2">{this.formatCount()}</span>
-                <button onClick={this.handleIncrement}
-                        className="btn btn-secondary btn-sm">Add to Cart</button>
+                <button
+                    onClick={this.handleIncrement}
+                    className="btn btn-secondary btn-sm">
+                        Add to Cart
+                </button>
+                <button
+                    onClick={() => this.props.onDelete(this.props.id)}
+                    className="btn btn-danger btn-sm m-2">
+                    Delete
+                </button>
             </div>
         );
     }
 
     formatCount() {
         const { count } = this.state;
-        console.log(count);
-        return count === 0 ? 'Zero' : count;
+        var c = this.state.value;
+        return c === 0 ? 'Zero' : c;
     }
 
 }
